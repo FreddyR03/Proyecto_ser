@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{ 
+    background-color: rgb(132, 132, 132);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;   
+    background: url(/fotos/fondo.png) no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.container{
+    background-color: rgb(176, 216, 252);
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: 2px solid #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 60%;
+    max-width: 500px;
+}
+
+.container img{
+    width: 50%;
+}
+
+.container h1{
+    margin-bottom: 10px;
+}
+.container input{
+    width: 80%;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    padding: 4px 10px;
+}
+
+.container select{
+    width: 85%;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    padding: 4px 10px;
+}
+
+.container button{
+    width: 40%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Cuando pase el  */
+.container button:hover {
+    background-color: #45a049; 
+    transform: scale(1.05);    
+}
+  
+  /* Cuando se hace clic cambia el efecto */
+.container button:active {
+    background-color: #3e8e41; 
+    transform: scale(1.1);     
+}

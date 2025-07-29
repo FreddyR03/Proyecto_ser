@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+    text-align: center;
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 2.5em;
+    color: #ff4c60;
+    text-shadow: 2px 2px #fff;
+}
+
+p {
+    font-size: 1.2em;
+    color: #444;
+}
+
+#superheroe {
+    width: 120px;
+    animation: flotar 3s ease-in-out infinite;
+    cursor: pointer;
+}
+
+@keyframes flotar {
+    0%,100% {transform: translateY(0);}
+    50% {transform: translateY(-15px);}
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 30px;
+    flex-wrap: wrap;
+}
+
+.caja {
+    width: 260px;
+    min-height: 320px;
+    border: 5px dashed #333;
+    border-radius: 25px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.caja:hover {transform: scale(1.05);}
+  #deberes {background-color: #b8ffcb;}
+  #derechos {background-color: #b8e5ff;}
+  .caja h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+  .tarjeta {
+    background: #fff8d9;
+    border: 2px solid #333;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 12px;
+    cursor: grab;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .tarjeta:hover {
+    transform: scale(1.05);
+    background: #ffeaa7;
+  }
+  .correcto {background: lightgreen !important;}
+  .incorrecto {background: lightcoral !important;}
+  #tarjetas {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  #mensaje {
+    font-size: 1.5em;
+    color: #ff4c60;
+    margin: 20px;
+  }
+  #info {
+    font-size: 1.3em;
+    margin: 15px;
+    font-weight: bold;
+    color: #222;
+  }
+ 

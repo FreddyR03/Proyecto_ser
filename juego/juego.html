@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="juego.css">
+<title>Juego Derechos y Deberes</title>
+
+</head>
+<body>
+
+<h1>¡Superhéroes de Derechos y Deberes!</h1>
+<img id="superheroe" src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="superheroe">
+<p id="dialogo">Haz clic en mí para ver consejos.</p>
+<p id="info">Puntos: <span id="puntos">0</span> | Nivel: <span id="nivel">1</span></p>
+
+<div id="tarjetas"></div>
+
+<div class="contenedor">
+  <div class="caja" id="deberes" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>DEBERES</h2>
+  </div>
+  <div class="caja" id="derechos" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h2>DERECHOS</h2>
+  </div>
+</div>
+
+<p id="mensaje"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+</body>
+</html>

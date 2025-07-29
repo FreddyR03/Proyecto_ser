@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" id="contenedor">
+        <img src="/fotos/Medical_Duarte.png" alt="Imagen de la Medical Duarte ">
+        <h1>¡Bienvenido a tu Aventura Pediátrica!</h1>
+        <form id="registro-form">
+            <input type="text" id="nombre" placeholder="Ingresa tu nombre campeón"rel><br>
+            <select  id="tipo-de-documento" required>
+                <option value="">Tipo de documento</option>
+                <option value="Registro civil">Registro Civil</option>
+                <option value="Targeta de identidad">Targeta de Identidad</option>
+                <option value="Carné estudiantil">Carné estudiantil</option>
+            </select>    
+            <input type="number" id="numero-identificacion"
+            maxlength="10" placeholder="Ingresa tu número de indentificación campeón" required><br>
+            <input type="number" id="habitacion" placeholder="Ingrese el numero de habitación"><br>
+            <input type="text" id="servicio" placeholder="Servicio"><br>
+            <button type="submit">Ingresar a la aventura</button> 
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
