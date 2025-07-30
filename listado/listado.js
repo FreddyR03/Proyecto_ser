@@ -1,4 +1,4 @@
- // Cargar registros del localStorage
+ // Cargar registros 
  const registros = JSON.parse(localStorage.getItem("registros")) || [];
 
  const tbody = document.querySelector("#tabla tbody");
