@@ -12,10 +12,16 @@ table {
     width: 90%;
     margin: 20px auto;
     background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); 
     border-radius: 10px;
-    overflow: hidden;
+    overflow-y: auto;
 }
+
+.tabla-contenedor{
+    max-height: 680px;   
+    overflow-y: auto;  
+}
+
 th, td {
     padding: 12px;
     border-bottom: 1px solid #ccc;

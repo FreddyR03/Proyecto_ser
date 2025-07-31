@@ -26,3 +26,31 @@
          location.reload();
      }
  });
+
+this.scoresData = { players: [] };
+
+// Botón Exportar
+document.getElementById("descargar-pdf").addEventListener("click", () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Título del documento
+    doc.setFontSize(18);
+    doc.text("Listado de Registros", 14, 15);
+
+    // Generar tabla automáticamente a partir de la tabla HTML
+    doc.autoTable({
+        html: "#tabla",  // Usa directamente tu tabla del DOM
+        startY: 25,
+        styles: {
+            fontSize: 10,
+            cellPadding: 2
+        },
+        headStyles: {
+            fillColor: [41, 128, 185]
+        }
+    });
+
+    // Guardar el PDF
+    doc.save("registros.pdf");
+});
