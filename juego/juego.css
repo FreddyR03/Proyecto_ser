@@ -29,22 +29,25 @@ p {
 }
 
 .contenedor {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    margin: 30px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px;
+  flex-wrap: wrap;
 }
 
+
 .caja {
-    width: 260px;
-    min-height: 320px;
-    border: 5px dashed #333;
-    border-radius: 25px;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+  width: 300px;
+  max-height: 570px;
+  overflow-y: auto;
+  border: 5px dashed #333;
+  border-radius: 25px;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+  padding-top: 0;
 }
 
 .caja:hover {transform: scale(1.05);}
@@ -52,8 +55,16 @@ p {
   #derechos {background-color: #b8e5ff;}
   .caja h2 {
     font-size: 1.5em;
-    margin-bottom: 15px;
-  }
+    margin: 0;
+    padding: 12px 8px;
+    position: sticky;
+    top: 0;
+    background-color: inherit; /* Hereda bien el fondo */
+    z-index: 2;
+    border-bottom: 2px solid #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra opcional suave para separación */
+}
+
   .tarjeta {
     background: #fff8d9;
     border: 2px solid #333;
@@ -85,3 +96,68 @@ p {
     color: #222;
   }
  
+  .caja::-webkit-scrollbar {
+    width: 8px;
+}
+.caja::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 10px;
+}
+
+ .inicio{
+  text-decoration: none;
+  color: #222;
+  background-color: #ffc0b8;
+  padding: 5px 5px;
+  border-radius: 10px;
+  transition: transform 0.5s;
+  margin-right: 70%;
+  text-align: center;
+}
+
+.listado{
+  text-decoration: none;
+  color: #222;
+  background-color: #ffc0b8;
+  padding: 5px 5px;
+  border-radius: 10px;
+  transition: transform 0.5s;
+  
+  text-align: center;
+}
+
+ 
+
+/* Estilo responsive para móviles */
+@media (max-width: 768px) {
+    .contenedor {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .caja {
+        width: 90%;
+        max-height: 200px;
+    }
+
+    #tarjetas {
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .inicio{
+      margin-right: 50%;
+      text-align: center;
+    }
+    
+    .listado{
+      margin-left: 60%;
+    }
+}
