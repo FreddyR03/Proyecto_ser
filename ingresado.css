@@ -10,7 +10,7 @@ body{
     align-items: center;
     height: 100vh;
     background-color: rgb(35, 12, 138);
-    background: url(/fotos/fondo.png) no-repeat;
+    background: url(./fondo.png) no-repeat;
     background-size: 100% 100%;
     background-position: center;
 }
