@@ -104,56 +104,55 @@ const deberes = [
   }
 
   // Soporte para dispositivos táctiles (mobile)
-let touchItem = null;
-
 document.querySelectorAll('.tarjeta').forEach(tarjeta => {
-  tarjeta.addEventListener('touchstart', e => {
-    touchItem = e.target;
-    touchItem.classList.add('tocando');
-  });
-
-  tarjeta.addEventListener('touchmove', e => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    touchItem.style.position = 'absolute';
-    touchItem.style.left = touch.pageX - 75 + 'px';
-    touchItem.style.top = touch.pageY - 40 + 'px';
-    touchItem.style.zIndex = 1000;
-  }, { passive: false });
-
-  tarjeta.addEventListener('touchend', e => {
-    const touch = e.changedTouches[0];
-    const cajaDeberes = document.getElementById('deberes').getBoundingClientRect();
-    const cajaDerechos = document.getElementById('derechos').getBoundingClientRect();
-
-    const x = touch.pageX;
-    const y = touch.pageY;
-
-    let destino = null;
-    if (x > cajaDeberes.left && x < cajaDeberes.right && y > cajaDeberes.top && y < cajaDeberes.bottom) {
-      destino = 'deberes';
-    } else if (x > cajaDerechos.left && x < cajaDerechos.right && y > cajaDerechos.top && y < cajaDerechos.bottom) {
-      destino = 'derechos';
-    }
-
-    // Resetea estilos
-    touchItem.style.position = '';
-    touchItem.style.left = '';
-    touchItem.style.top = '';
-    touchItem.style.zIndex = '';
-    touchItem.classList.remove('tocando');
-
-    if (destino) {
-      const fakeDropEvent = {
-        preventDefault: () => {},
-        dataTransfer: {
-          getData: () => touchItem.id
-        },
-        currentTarget: document.getElementById(destino)
-      };
-      drop(fakeDropEvent);
-    }
-
-    touchItem = null;
-  });
+    tarjeta.addEventListener('touchstart', onTouchStart);
+    tarjeta.addEventListener('touchmove', onTouchMove);
+    tarjeta.addEventListener('touchend', onTouchEnd);
 });
+
+let tarjetaActual = null;
+
+function onTouchStart(e) {
+    tarjetaActual = e.target;
+    tarjetaActual.style.position = 'absolute';
+    tarjetaActual.style.zIndex = '1000';
+}
+
+function onTouchMove(e) {
+    if (!tarjetaActual) return;
+    const touch = e.touches[0];
+    tarjetaActual.style.left = touch.pageX - tarjetaActual.offsetWidth / 2 + 'px';
+    tarjetaActual.style.top = touch.pageY - tarjetaActual.offsetHeight / 2 + 'px';
+}
+
+function onTouchEnd(e) {
+    if (!tarjetaActual) return;
+
+    const cajas = document.querySelectorAll('.caja');
+    let colocada = false;
+
+    cajas.forEach(caja => {
+        const cajaRect = caja.getBoundingClientRect();
+        const tarjetaRect = tarjetaActual.getBoundingClientRect();
+
+        if (
+            tarjetaRect.left < cajaRect.right &&
+            tarjetaRect.right > cajaRect.left &&
+            tarjetaRect.top < cajaRect.bottom &&
+            tarjetaRect.bottom > cajaRect.top
+        ) {
+            caja.appendChild(tarjetaActual);
+            tarjetaActual.style.position = 'relative';
+            tarjetaActual.style.left = 'auto';
+            tarjetaActual.style.top = 'auto';
+            colocada = true;
+        }
+    });
+
+    if (!colocada) {
+        // volver a posición original o manejar como desees
+        tarjetaActual.style.position = 'static';
+    }
+
+    tarjetaActual = null;
+}
