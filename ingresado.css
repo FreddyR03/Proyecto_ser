@@ -27,9 +27,6 @@ body{
 }
 
 @media (max-width: 768px) {
-    body{
-        height: 126vh;
-    }
     .container{
         padding: 20px 20px;
     }
