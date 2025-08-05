@@ -36,6 +36,7 @@ const deberes = [
     div.draggable = true;
     div.id = "tarjeta"+i;
     div.dataset.tipo = item.tipo;
+    div.dataset.categoria = item.tipo === "deberes" ? "deber" : "derecho";
     div.ondragstart = drag;
     contTarjetas.appendChild(div);
   });
@@ -106,35 +107,50 @@ const deberes = [
   // Soporte para celulares
 let tarjetaSeleccionada = null;
 
-// Al tocar una tarjeta
-document.querySelectorAll('.tarjeta').forEach(tarjeta => {
-    tarjeta.addEventListener('click', () => {
-        tarjetaSeleccionada = tarjeta;
-        tarjeta.classList.add('seleccionada');
-    });
+// Seleccionar tarjeta con clic
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('tarjeta')) {
+    tarjetaSeleccionada = e.target;
+    document.querySelectorAll('.tarjeta').forEach(t => t.classList.remove('seleccionada'));
+    tarjetaSeleccionada.classList.add('seleccionada');
+  }
 });
 
-// Al tocar una caja
+// Tocar caja para clasificar
 document.querySelectorAll('.caja').forEach(caja => {
-    caja.addEventListener('click', () => {
-        if (!tarjetaSeleccionada) return;
+  caja.addEventListener('click', () => {
+    if (!tarjetaSeleccionada) return;
 
-        const categoria = tarjetaSeleccionada.dataset.categoria;
-        const idCaja = caja.id;
+    const categoria = tarjetaSeleccionada.dataset.categoria;
+    const destino = caja.id;
 
-        if (
-            (categoria === 'derecho' && idCaja === 'caja-derechos') ||
-            (categoria === 'deber' && idCaja === 'caja-deberes')
-        ) {
-            // Correcto
-            caja.appendChild(tarjetaSeleccionada);
-            tarjetaSeleccionada.classList.remove('seleccionada');
-            tarjetaSeleccionada = null;
-        } else {
-            // Incorrecto
-            Swal.fire("Incorrecto", "Parece que no va ahí, intente denuevo", "error");
-            tarjetaSeleccionada.classList.remove('seleccionada');
-            tarjetaSeleccionada = null;
-        }
-    });
+    if (
+      (categoria === 'deber' && destino === 'deberes') ||
+      (categoria === 'derecho' && destino === 'derechos')
+    ) {
+      tarjetaSeleccionada.classList.remove('seleccionada', 'incorrecto');
+      tarjetaSeleccionada.classList.add('correcto');
+      tarjetaSeleccionada.draggable = false;
+      caja.appendChild(tarjetaSeleccionada);
+      tarjetaSeleccionada = null;
+
+      aciertos++;
+      puntos += 10;
+      if (puntos % 50 === 0) nivel++;
+      actualizarInfo();
+
+      if (aciertos === todas.length) {
+        document.getElementById("mensaje").innerText = "¡Felicidades! Clasificaste todo. Eres un Guardián.";
+        lanzarConfeti();
+      }
+    } else {
+      tarjetaSeleccionada.classList.add("incorrecto");
+      setTimeout(() => tarjetaSeleccionada.classList.remove("incorrecto"), 1000);
+      Swal.fire("Incorrecto", "Parece que no va ahí, intenta de nuevo", "error");
+      puntos = Math.max(0, puntos - 5);
+      actualizarInfo();
+      tarjetaSeleccionada.classList.remove("seleccionada");
+      tarjetaSeleccionada = null;
+    }
+  });
 });
