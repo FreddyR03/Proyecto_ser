@@ -103,56 +103,38 @@ const deberes = [
     });
   }
 
-  // Soporte para dispositivos táctiles (mobile)
+  // Soporte para celulares
+let tarjetaSeleccionada = null;
+
+// Al tocar una tarjeta
 document.querySelectorAll('.tarjeta').forEach(tarjeta => {
-    tarjeta.addEventListener('touchstart', onTouchStart);
-    tarjeta.addEventListener('touchmove', onTouchMove);
-    tarjeta.addEventListener('touchend', onTouchEnd);
+    tarjeta.addEventListener('click', () => {
+        tarjetaSeleccionada = tarjeta;
+        tarjeta.classList.add('seleccionada');
+    });
 });
 
-let tarjetaActual = null;
+// Al tocar una caja
+document.querySelectorAll('.caja').forEach(caja => {
+    caja.addEventListener('click', () => {
+        if (!tarjetaSeleccionada) return;
 
-function onTouchStart(e) {
-    tarjetaActual = e.target;
-    tarjetaActual.style.position = 'absolute';
-    tarjetaActual.style.zIndex = '1000';
-}
-
-function onTouchMove(e) {
-    if (!tarjetaActual) return;
-    const touch = e.touches[0];
-    tarjetaActual.style.left = touch.pageX - tarjetaActual.offsetWidth / 2 + 'px';
-    tarjetaActual.style.top = touch.pageY - tarjetaActual.offsetHeight / 2 + 'px';
-}
-
-function onTouchEnd(e) {
-    if (!tarjetaActual) return;
-
-    const cajas = document.querySelectorAll('.caja');
-    let colocada = false;
-
-    cajas.forEach(caja => {
-        const cajaRect = caja.getBoundingClientRect();
-        const tarjetaRect = tarjetaActual.getBoundingClientRect();
+        const categoria = tarjetaSeleccionada.dataset.categoria;
+        const idCaja = caja.id;
 
         if (
-            tarjetaRect.left < cajaRect.right &&
-            tarjetaRect.right > cajaRect.left &&
-            tarjetaRect.top < cajaRect.bottom &&
-            tarjetaRect.bottom > cajaRect.top
+            (categoria === 'derecho' && idCaja === 'caja-derechos') ||
+            (categoria === 'deber' && idCaja === 'caja-deberes')
         ) {
-            caja.appendChild(tarjetaActual);
-            tarjetaActual.style.position = 'relative';
-            tarjetaActual.style.left = 'auto';
-            tarjetaActual.style.top = 'auto';
-            colocada = true;
+            // Correcto
+            caja.appendChild(tarjetaSeleccionada);
+            tarjetaSeleccionada.classList.remove('seleccionada');
+            tarjetaSeleccionada = null;
+        } else {
+            // Incorrecto
+            Swal.fire("Incorrecto", "Parece que no va ahí, intente denuevo", "error");
+            tarjetaSeleccionada.classList.remove('seleccionada');
+            tarjetaSeleccionada = null;
         }
     });
-
-    if (!colocada) {
-        // volver a posición original o manejar como desees
-        tarjetaActual.style.position = 'static';
-    }
-
-    tarjetaActual = null;
-}
+});
