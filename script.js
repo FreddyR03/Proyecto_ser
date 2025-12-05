@@ -23,7 +23,7 @@ if (form) {
         localStorage.setItem("registros", JSON.stringify(registros));
         localStorage.setItem("ultimoNombre", nombre);
 
-        window.location.href = "/ingresado.html";
+        window.location.href = "./ingreso/ingresado.html";
         form.reset();
     });
 }
